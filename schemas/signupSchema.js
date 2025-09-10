@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
-// Create a user schema
 const userSchema = new mongoose.Schema({
        email: {
               type: String,
               required: true,
-              lowercase: true, // Ensure email is always lowercase for consistency
+              lowercase: true, 
        },
        username: {
               type: String,

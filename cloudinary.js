@@ -10,8 +10,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
        cloudinary: cloudinary,
        params: {
-              folder: 'some-folder-name', // Make sure this matches Cloudinary's folder name
-              allowedFormats: ["png", "jpg", "jpeg"], // Corrected typo
+              folder: 'some-folder-name', 
+              allowedFormats: ["png", "jpg", "jpeg"], 
        },
 });
 

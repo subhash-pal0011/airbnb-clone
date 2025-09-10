@@ -1,7 +1,7 @@
 const mainSchema = require('../schemas/mainSchema');
 const Review = require("../schemas/reviewSchema");
 const { mainSchemaJoi, ReviewJio } = require('../joiSchema');
-const RoutingError = require("../errorFolder/routNotDefine");
+const RoutingError = require("../HandelErrorFolder/routNotDefine");
 const multer = require('multer');
 const { storage } = require("../cloudinary"); 
 const upload = multer({ storage });
@@ -24,7 +24,6 @@ module.exports.edit = async (req, res) => {
 }
 
 module.exports.update = async (req, res, next) => {
-       // Validate request body
        const { error } = mainSchemaJoi.validate(req.body);
        if (error) {
               req.flash("error", "Validation failed. Please check the input characters!");
@@ -36,15 +35,12 @@ module.exports.update = async (req, res, next) => {
               req.flash("error", "Post not found.");
               return res.redirect("/index");
        }
-       // Check if the current user is the owner
        if (!upData.owner.equals(req.user._id)) {
               req.flash("error", "You are not authorized to update this post.");
               return res.redirect("/index");
        }
-       // Prepare the updated data
        const updatedData = { ...req.body }; 
-       // edit img
-       if(req.file){   // IS ERROR SE BACHNE KE LIYE Cannot read properties of undefined (reading 'path') CONDITION LAGYE KI AGR FILE EXISTS KARTI HII TABHI KRNA VRNA MAT KRNA.
+       if(req.file){   
               updatedData.image = {url: req.file.path, filename: req.file.filename};
        } 
        let newUpdateData = await mainSchema.findByIdAndUpdate(id, updatedData, { new: true });

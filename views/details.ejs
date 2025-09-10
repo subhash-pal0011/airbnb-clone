@@ -11,10 +11,6 @@
 
 
           <div class="text-start">
-            <!-- <p class="mb-1"><strong>Post By :</strong>
-              <= data.owner.username %>
-              <= data.owner.username %>
-            </p> -->
             <p class="mb-1"><strong>Post By :</strong>
               <%= data.owner ? data.owner.username : 'Unknown' %>
             </p>
@@ -37,7 +33,6 @@
           </div>
         </div>
 
-        <!-- // PAHLE HI CHECK KAR LO KI CURRENT USER EXIST KR RHA HII KI NHI [ toString() ISKI JAGH PE HUM EQUELS MEYTHOD BHI LAGA SKTE THE ] . -->
         <% if (currentUser && data.owner && currentUser.id.toString()===data.owner.id.toString()) { %>
           <div class="d-flex">
             <form method="GET" action="/index/<%= data._id %>/detail" class="me-2">
@@ -92,7 +87,7 @@
   <div class="container my-4">
     <h4 class="mb-3">User Reviews</h4>
 
-    <% if (data.review.length===0) { %> <!-- AGR KOI Review NHI RHEGA TO US CASE MEA YE DIKHANA HII No reviews yet. -->
+    <% if (data.review.length===0) { %>
       <p class="text-muted">No reviews yet.</p>
       <% } %>
 
